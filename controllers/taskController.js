@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const Task = require("../models/taskModel");
 
 /**
- * @desc  Get all tasks 
+ * @desc  Get all tasks
  * @route   /api/v1/tasks/
  * @method  GET
  * @access  Private
@@ -11,7 +11,7 @@ const Task = require("../models/taskModel");
  */
 
 const getTask = asyncHandler(async (req, res) => {
-  const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 })
+  const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
   res.status(200).json(tasks);
 });
 
@@ -74,10 +74,14 @@ const getTasksByStatus = asyncHandler(async (req, res) => {
 const markAsComplete = asyncHandler(async (req, res) => {
   try {
     const taskId = req.params.id;
-    const updatedTask = await Task.findByIdAndUpdate(taskId, { isCompleted: true }, { new: true });
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { isCompleted: true },
+      { new: true }
+    );
 
     if (!updatedTask) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ error: "Task not found" });
     }
 
     res.json(updatedTask);
@@ -85,7 +89,6 @@ const markAsComplete = asyncHandler(async (req, res) => {
     next(error);
   }
 });
-
 
 /**
  * @desc    Create a new task for the authenticated user
@@ -96,16 +99,8 @@ const markAsComplete = asyncHandler(async (req, res) => {
  */
 
 const addTask = asyncHandler(async (req, res) => {
-  const {
-    title,
-    description,
-    priorityLevel,
-    status,
-    category,
-    tags,
-    dueDate,
- 
-  } = req.body;
+  const { title, description, priorityLevel, status, category, tags, dueDate } =
+    req.body;
 
   if (!req.body.title) {
     res.status(400);
@@ -193,6 +188,46 @@ const deleteTask = asyncHandler(async (req, res, next) => {
   }
 });
 
+/**
+ * @desc    Get all tasks, optionally sorted and filtered
+ * @route   GET /api/v1/task
+ * @access  Public
+ * @param   sortBy - The field to sort by
+ * @param   sortDirection - The sort direction (asc or desc)
+ * @param   title - The title to filter by
+ * @param   dueDate - The due date to filter by
+ * @param   priority - The priority to filter by
+ * @return  An array of task objects
+ */
+
+const getFilteredTasks = asyncHandler(async (req, res, next) => {
+  try {
+    const filters = {};
+
+    if (req.query.title) {
+      filters.title = new RegExp(req.query.title, "i");
+    }
+
+    if (req.query.dueDate) {
+      filters.dueDate = new Date(req.query.dueDate);
+    }
+
+    if (req.query.priority) {
+      filters.priority = req.query.priority;
+    }
+
+    const tasks = await Task.find(filters).sort(
+      req.query.sortBy && {
+        [req.query.sortBy]: req.query.sortDirection === "desc" ? -1 : 1,
+      }
+    );
+
+    res.json(tasks);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = {
   getTask,
   addTask,
@@ -201,4 +236,5 @@ module.exports = {
   getTasksByPriority,
   getTasksByStatus,
   markAsComplete,
+  getFilteredTasks,
 };

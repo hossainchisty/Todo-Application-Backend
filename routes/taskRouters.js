@@ -10,6 +10,7 @@ const {
   getTasksByPriority,
   getTasksByStatus,
   markAsComplete,
+  getFilteredTasks,
 } = require("../controllers/taskController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -29,6 +30,8 @@ router.route("/priority/:priority").get(protect, getTasksByPriority);
 
 // Get tasks by status
 router.route("/status/:status").get(protect, getTasksByStatus);
+
+router.route("/filter").get(protect, getFilteredTasks);
 
 // Exporting the Router
 module.exports = router;
