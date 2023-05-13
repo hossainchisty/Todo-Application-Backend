@@ -1,10 +1,10 @@
 ### Todo-List-Backend-Application
 
-## API Routers and Methods
+#### API Routers and Methods
 
 List all the API routes and HTTP methods used in the project, along with a brief description of what each endpoint does.
 
-### Task Creation and Management:
+#### Task Creation and Management:
 
 - `/api/v1/tasks` - `GET`: Get all tasks
 - `/api/v1/tasks` - `POST`: Create a new task
@@ -12,7 +12,7 @@ List all the API routes and HTTP methods used in the project, along with a brief
 - `/api/v1/tasks/:taskID` - `DELETE`: Delete task
 - `/api/v1/tasks/:taskID` - `GET`: Mark the task as completed
 
-### Task Sorting and Filtering:
+#### Task Sorting and Filtering:
 
 - `/api/v1/tasks/status/:status` - `GET`: Find tasks based on status
 
@@ -20,7 +20,7 @@ List all the API routes and HTTP methods used in the project, along with a brief
 
 - `/api/v1/tasks/filter?sortBy=dueDate&sortDirection=asc&title=homework&dueDate=2023-05-31&priority=high` - `GET`: Get all tasks, optionally sorted and filtered
 
-### Task Categories and Tags:
+#### Task Categories and Tags:
 
 - `/api/v1/tag/` - `GET`: List of tags
 
@@ -38,7 +38,7 @@ List all the API routes and HTTP methods used in the project, along with a brief
 
 - `/api/v1/category/:categoryID` - `DELETE`: Delete category
 
-### User Profile:
+#### User Profile:
 
 - `/api/v1/users/register` - `POST`: Register new user
 
