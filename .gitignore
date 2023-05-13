@@ -23,5 +23,5 @@ yarn-error.log*
 # Env
 .env
 
-# Readme
-Scripts.md
+# Requrements
+Requrements.md
