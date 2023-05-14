@@ -32,11 +32,13 @@ const taskSchema = mongoose.Schema(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
+      required: false,
     },
     tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag",
+        required: false,
       },
     ],
     isCompleted: {
