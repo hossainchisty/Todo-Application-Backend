@@ -22,6 +22,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14.x"
+      - name: 🔐 Set environment variables
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+        run: echo "MONGO_URL=${MONGO_URL}"
       - name: 🔍 Install dependencies
         run: npm install --prefer-offline --no-audit
       - name: ✅ Run tests
