@@ -1,4 +1,4 @@
-// Database Lib Import
+// Basic Lib Imports
 const Task = require("../models/taskModel");
 const request = require("supertest");
 const app = require("../app");
@@ -44,20 +44,23 @@ describe("POST /api/v1/tasks", () => {
         done();
       });
   });
-}, 10000); // set timeout to 10 seconds
+});
 
-describe('PUT /api/v1/tasks/:id', () => {
-  it('Updates a task and responds with a 200 status code', async () => {
+describe("PUT /api/v1/tasks/:id", () => {
+  it("Updates a task and responds with a 200 status code", async () => {
     const task = await Task.findOne();
-    const updatedTask = { title: 'Updated task', description: 'This task has been updated'};
+    const updatedTask = {
+      title: "Updated task",
+      description: "This task has been updated",
+    };
     const res = await request(app)
       .put(`/api/v1/tasks/${task._id}`)
-      .set('Authorization', `Bearer ${token}`)
+      .set("Authorization", `Bearer ${token}`)
       .send(updatedTask)
       .expect(200);
 
-    expect(res.body.title).toEqual('Updated task');
-    expect(res.body.description).toEqual('This task has been updated');
+    expect(res.body.title).toEqual("Updated task");
+    expect(res.body.description).toEqual("This task has been updated");
   });
 });
 
@@ -73,4 +76,4 @@ describe("DELETE /api/v1/tasks/:id", () => {
         expect(res.body.message).toBe("Task was deleted.");
       });
   });
-}, 10000); // increase timeout to 10 seconds
+});
