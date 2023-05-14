@@ -37,7 +37,7 @@ const addTag = asyncHandler(async (req, res) => {
     user: req.user.id,
     name,
   });
-  res.status(200).json(task_tags);
+  res.status(201).json(task_tags);
 });
 
 /**
