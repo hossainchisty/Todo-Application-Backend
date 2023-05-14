@@ -23,5 +23,9 @@ yarn-error.log*
 # Env
 .env
 
+# Coverage
+.coverage
+.nyc_output
+
 # Requrements
 Requrements.md
