@@ -117,7 +117,7 @@ const addTask = asyncHandler(async (req, res) => {
     tags,
     dueDate,
   });
-  res.status(200).json(task);
+  res.status(201).json(task);
 });
 
 /**
@@ -175,7 +175,7 @@ const deleteTask = asyncHandler(async (req, res, next) => {
     });
 
     if (!deletedTask) {
-      res.status(400);
+      res.status(404);
       throw new Error("Task not found");
     }
     res.status(200).json({
