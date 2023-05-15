@@ -33,12 +33,12 @@ const addCategory = asyncHandler(async (req, res) => {
     throw new Error("Please add task category name.");
   }
 
-  const task_category = await Category.create({
+  const taskCategory = await Category.create({
     user: req.user.id,
     name,
     description,
   });
-  res.status(200).json(task_category);
+  res.status(201).json(taskCategory);
 });
 
 /**
