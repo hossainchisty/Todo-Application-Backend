@@ -40,7 +40,7 @@ describe("POST /api/v1/tasks", () => {
         expect(res.body).toHaveProperty("_id");
         expect(res.body.title).toBe(newTask.title);
         expect(res.body.description).toBe(newTask.description);
-        expect(res.body.priority).toBe(newTask.priority);
+        expect(res.body.priorityLevel).toBe(newTask.priorityLevel);
         done();
       });
   });
