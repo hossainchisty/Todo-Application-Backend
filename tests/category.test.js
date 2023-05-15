@@ -7,11 +7,11 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWY3OGRmZDcxOGE3ODk2NDhjYTk1NSIsImlhdCI6MTY4Mzk3ODQ2MywiZXhwIjoxNjg2NTcwNDYzfQ.RXWne_pcsU5kAMg-WLg8-ZvYoBm6bD3BGv4AMwzzvi8";
 
 describe("GET  /api/v1/category", () => {
-  it("Responds with a JSON array of tasks", (done) => {
+  it("Responds with a JSON array of category", (done) => {
     request(app)
-      .get(" /api/v1/category")
+      .get("/api/v1/category")
       .set("Authorization", `Bearer ${token}`)
-      .expect("Content-Type", /json/)
+      .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -30,8 +30,9 @@ describe("POST /api/v1/category", () => {
     request(app)
       .post("/api/v1/category")
       .set("Authorization", `Bearer ${token}`)
+      .set('Content-Type', 'application/json')
       .send(newCategory)
-      .expect("Content-Type", /json/)
+      .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
@@ -42,12 +43,13 @@ describe("POST /api/v1/category", () => {
   });
 });
 
+
 describe("PUT /api/v1/category/:id", () => {
   it("Updates a category and responds with a 200 status code", async () => {
     const category = await Category.findOne();
     const updatedCategory = { name: "Updated category" };
     const res = await request(app)
-      .put(`/api/v1/category${category._id}`)
+      .put(`/api/v1/category/${category._id}`)
       .set("Authorization", `Bearer ${token}`)
       .send(updatedCategory)
       .expect(200);
