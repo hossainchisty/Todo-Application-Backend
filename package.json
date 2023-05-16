@@ -9,6 +9,11 @@
     "coverage": "nyc --reporter=text-lcov jest && nyc report --reporter=text-summary"
   },
   "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
     "verbose": true,
     "detectOpenHandles": true,
     "testEnvironment": "node",
