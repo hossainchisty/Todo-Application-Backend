@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   getTask,
+  getTasks,
   addTask,
   updateTask,
   deleteTask,
@@ -16,7 +17,7 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 
 // Adding n getting tasks
-router.route("/").get(protect, getTask).post(protect, addTask);
+router.route("/").get(protect, getTasks).post(protect, addTask);
 
 // Deleting n updating tasks
 router
@@ -32,6 +33,8 @@ router.route("/priority/:priority").get(protect, getTasksByPriority);
 router.route("/status/:status").get(protect, getTasksByStatus);
 
 router.route("/filter").get(protect, getFilteredTasks);
+
+router.route("/item/:taskID").get(protect, getTask)
 
 // Exporting the Router
 module.exports = router;
