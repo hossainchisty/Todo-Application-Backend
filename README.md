@@ -7,6 +7,7 @@ List all the API routes and HTTP methods used in the project, along with a brief
 #### Task Creation and Management:
 
 - `/api/v1/tasks` - `GET`: Get all tasks
+- `/api/v1/tasks/item/:taskID` - `GET`: Get a single task
 - `/api/v1/tasks` - `POST`: Create a new task
 - `/api/v1/tasks/:taskID` - `PUT`: Update task
 - `/api/v1/tasks/:taskID` - `DELETE`: Delete task
